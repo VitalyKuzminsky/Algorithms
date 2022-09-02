@@ -17,3 +17,48 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+dict_profit = {
+    'Google': 4180,
+    'Яндекс': 8,
+    'Mail.ru Group': 10,
+    'Лаборатория Касперского': 2,
+    'Apple': 3300
+}
+
+
+def top_3_var1(dict_in):
+    """
+    O(n log n) линейно-логарифмическая
+    Печатает прибыль Топ3 компаний по прибыли в млрд.руб.
+    :param dict_in: dict
+    :return: str
+    """
+    new_list = list(dict_in.items())                    # O(n) линейная
+    new_list.sort(key=lambda el: el[1], reverse=True)   # O(n log n) линейно-логарифмическая
+    for el in range(3):                                 # O(1) константная
+        print(f'Прибыль компании {new_list[el][0]}: {new_list[el][1]} млрд. руб.')  # O(1) константная
+
+
+def top_3_var2(dict_in):
+    """
+    O(n) линейная
+    Возвращает Топ3 компаний по прибыли.
+    :param dict_in: dict
+    :return: dict
+    """
+    max_profit = {}                 # O(1) константная
+    for i in range(3):              # O(1) константная
+        maximum = max(dict_in.items(), key=lambda x: x[1])  # O(n) линейная
+        del dict_in[maximum[0]]     # O(1) константная
+        max_profit[maximum[0]] = maximum[1]  # O(1) константная
+    return max_profit               # O(1) константная
+
+
+top_3_var1(dict_profit)
+print()
+print(top_3_var2(dict_profit))
+
+"""
+Вывод: 2-ая функция (top_3_var2) эффективнее, т.к. сложность алгоритма O(n) линейная 
+предпочтительней, чем O(n log n) линейно-логарифмическая
+"""

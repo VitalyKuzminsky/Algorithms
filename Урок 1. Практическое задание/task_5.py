@@ -17,3 +17,58 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+class MyStackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):  # пустой
+        return self.elems == []
+
+    def add_to(self, el):  # добавляем элемент
+        self.elems.append(el)
+
+    def pop_out(self):  # убираем элемент
+        return self.elems.pop()
+
+    def get_val(self):  # получить значение верхнего элемента стека
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):  # размер стека
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+
+    msc_obj = MyStackClass()
+
+    print(msc_obj.is_empty())  # -> стек пустой True
+
+    # наполнение стека "тарелок"
+    msc_obj.add_to('тарелка 01')
+    msc_obj.add_to('тарелка 02')
+    msc_obj.add_to('тарелка 03')
+    msc_obj.add_to('тарелка 04')
+    msc_obj.add_to('тарелка 05')
+    msc_obj.add_to('тарелка 06')
+    msc_obj.add_to('тарелка 07')
+    msc_obj.add_to('тарелка 08')
+
+    # значение первого элемента сверху стека "стопки тарелок"
+    print(msc_obj.get_val())  # -> тарелка 08
+
+    # размер стека
+    print(msc_obj.stack_size())  # -> 8
+
+    print(msc_obj.is_empty())  # -> стек уже непустой False
+
+    # добавление ещё "тарелки"
+    msc_obj.add_to('тарелка 09')
+
+    # удаление элемента сверху стека с возвращением его значения
+    print(msc_obj.pop_out())  # -> тарелка 09
+    print(msc_obj.pop_out())  # -> тарелка 08
+
+    # размер стека
+    print(msc_obj.stack_size())  # -> 7
