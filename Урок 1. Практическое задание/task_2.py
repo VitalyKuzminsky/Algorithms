@@ -15,3 +15,38 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def min_val_from_list_1(list_in):
+    """
+    Первый алгоритм O(n^2) - квадратичная
+    Возвращает минимальное значение из списка
+    :param list_in: list
+    :return: min value
+    """
+    for el in list_in:              # O(n) линейная
+        val_is_min = True           # O(1) константная
+        for i in list_in:           # O(n) линейная в O(n) линейной = O(n^2) квадратичная
+            if el > i:              # O(1) константная
+                val_is_min = False  # O(1) константная
+        if val_is_min:              # O(1) константная
+            return el               # O(1) константная
+
+
+def min_val_from_list_2(list_in):
+    """
+    Второй алгоритм O(n) - линейная
+    Возвращает минимальное значение из списка
+    :param list_in: list
+    :return: min value
+    """
+    val_is_min = list_in[0]         # O(1) константная
+    for el in list_in:              # O(n) линейная
+        if el < val_is_min:         # O(1) константная
+            val_is_min = el         # O(1) константная
+    return val_is_min               # O(1) константная
+
+
+my_list = [5, 3, 6, 10, 4]
+print(min_val_from_list_1(my_list))
+print(min_val_from_list_2(my_list))
