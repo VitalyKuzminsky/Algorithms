@@ -10,3 +10,14 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_of_series(number_of_elements):
+    if number_of_elements == 0:
+        return 0
+    else:
+        return 1 + sum_of_series(number_of_elements - 1) / - 2
+
+
+number = int(input('Введите количество элементов:\n'))
+print(f'Количество элементов - {number}, их сумма - {sum_of_series(number)}')

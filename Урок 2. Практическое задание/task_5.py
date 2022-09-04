@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii(symbol, end):
+    if symbol == end + 1:
+        return
+    print(f' {symbol} - {chr(symbol)}', end=' ')
+    if (symbol - 31) % 10 == 0:
+        print('\n')
+    table_ascii(symbol + 1, end)
+
+
+table_ascii(32, 127)
+print()
+print('=================== разделитель для удобства чтения ===========================')
+table_ascii(52, 124)  # можно указывать другие диапазоны
