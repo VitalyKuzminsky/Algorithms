@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def left_side_of_equality(number):
+    if number == 1:
+        return number
+    else:
+        return left_side_of_equality(number - 1) + number
+
+
+def equality_check(num_in):
+    if left_side_of_equality(num_in) == num_in * (num_in + 1) / 2:
+        print('Равенство верно')
+
+
+n = 5
+equality_check(n)
