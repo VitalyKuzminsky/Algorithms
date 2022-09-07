@@ -15,3 +15,28 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+
+import hashlib
+from datetime import datetime
+
+
+cache = {}
+
+
+def cash_web(url):
+    """
+    Принимает url-адрес и проверяет, есть ли в кэше соответствующая страница.
+    Если нет, то записывает хэш url-а в кэш, если есть, то возвращает соответствующий хэш.
+    :param url: str url-адрес
+    :return: str хеш url-а
+    """
+    if cache.get(url):
+        return cache[url]
+    else:
+        salt = str(datetime.now())
+        cache[url] = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
+
+
+print(cash_web('https://yandex.ru/'))
+print(cash_web('https://yandex.ru/'))

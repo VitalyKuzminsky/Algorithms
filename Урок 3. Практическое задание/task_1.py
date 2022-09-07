@@ -28,3 +28,104 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def time_counting(function):
+    def metering(*args, **kwargs):
+        start = time.time()
+        result = function(*args, **kwargs)
+        finish = time.time()
+        delta = finish - start
+        print(f'Время на выполнение функции: {float(delta):.3f}')
+        return result
+    return metering
+
+
+@time_counting
+def add_list(list_in, number):
+    for el in range(number):
+        list_in.append(el)       # Сложность O(1) константная
+
+
+@time_counting
+def add_dict(dict_in, number):
+    for el in range(number):
+        dict_in[el] = el          # Сложность O(1) константная
+
+
+@time_counting
+def get_list(list_in):
+    for el in list_in:
+        el                        # Сложность O(1) константная
+
+
+@time_counting
+def get_dict(dict_in):
+    for key in dict_in:
+        key                       # Сложность O(n) линейная
+
+
+@time_counting
+def delete_list(list_in, number):
+    for el in range(number):
+        list_in.pop(el)          # Сложность O(1) константная
+
+
+@time_counting
+def delete_dict(dict_in, number):
+    for el in range(number):
+        dict_in.pop(el)  # удаляем тысячу ключей из словаря
+
+
+add_el = 100000
+del_el = 10000
+
+
+my_list = []
+print('Задание а) заполнение списка:')
+add_list(my_list, add_el)
+print()
+my_dict = {}
+print('Задание а) заполнение словаря:')
+add_dict(my_dict, add_el)
+print()
+
+print('Задание b) получение элемента списка:')
+get_list(my_list)
+print()
+print('Задание b) получение элемента словаря:')
+get_dict(my_dict)
+print()
+
+print('Задание c) удаление элемента списка:')
+delete_list(my_list, del_el)
+print()
+print('Задание c) удаление элемента словаря:')
+delete_dict(my_dict, del_el)
+
+"""
+Задание а) заполнение списка:
+Время на выполнение функции: 0.008
+Задание а) заполнение словаря:
+Время на выполнение функции: 0.010
+Время примерно одинаковое и то и другое выполняется с константной сложностью, в 
+список добавляется в конец, а в словарь - это хеш-таблица, тоже константная сложность.
+Но хеширование ключей чуть дольше
+
+Задание b) получение элемента списка:
+Время на выполнение функции: 0.004
+Задание b) получение элемента словаря:
+Время на выполнение функции: 0.004
+Аналогично.
+
+Задание c) удаление элемента списка:
+Время на выполнение функции: 0.336
+Задание c) удаление элемента словаря:
+Время на выполнение функции: 0.001
+Здесь удаление списка прошло в несколько раз дольше словаря, хотя и там и там 
+сложность доступа к последнему элементу должна быть константной, но видимо 
+подкапотно хеш-таблицы работают быстрее
+"""
+
