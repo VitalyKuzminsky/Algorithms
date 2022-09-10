@@ -24,3 +24,24 @@ reduce
 __mul__
 __add__
 """
+
+
+import collections
+from functools import reduce
+
+
+def hexadecimal_calc():
+    numbers = collections.defaultdict(list)
+    for d in range(2):
+        number = input(f'Введите шестнадцатиричное число:\n')
+        numbers[number] = list(number)
+    print(numbers)
+
+    result_sum = sum([int(''.join(i), 16) for i in numbers.values()])
+
+    print(f'Сумма чисел: {list("%X" % result_sum)}')
+    mul_res = reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in numbers.values()])
+    print(f'Произведение - {list("%X" % mul_res)}')
+
+
+hexadecimal_calc()
