@@ -30,3 +30,49 @@
 
 Это файл для первого скрипта
 """
+
+"""
+Алгоритмы ДЗ 4 урок Задание 4.
+Приведены два алгоритма. В них определяется число,
+которое встречается в массиве чаще всего.
+"""
+
+
+from memory_profiler import profile
+
+
+array = [1, 3, 1, 3, 4, 5, 1] * 1000
+
+
+@profile
+def func_1():
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+@profile
+def func_2():
+    new_array = []
+    for el in array:
+        count2 = array.count(el)
+        new_array.append(count2)
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+print(func_1())
+print(func_2())
+
+"""
+func_2 использует больше памяти, так ка создаёт новый массив
+"""

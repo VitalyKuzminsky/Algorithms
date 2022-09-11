@@ -30,3 +30,37 @@
 
 Это файл для второго скрипта
 """
+
+"""
+Алгоритмы ДЗ 5 урок Задача 3.
+создайте простой список (list) и очередь (deque)
+"""
+
+from memory_profiler import profile
+from collections import deque
+
+number_iterations = 100000
+my_list = [i for i in range(number_iterations)]
+my_deque = deque([i for i in range(number_iterations)])
+
+
+@profile
+def append_list(list_in):
+    for i in range(number_iterations):
+        list_in.append(i)
+    return list_in
+
+
+@profile
+def append_deque(deque_in):
+    for i in range(number_iterations):
+        deque_in.append(i)
+    return deque_in
+
+
+append_list(my_list)
+append_deque(my_deque)
+
+"""
+deque из collections занимает больше места, чем обычный list
+"""

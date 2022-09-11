@@ -30,3 +30,39 @@
 
 Это файл для четвертого скрипта
 """
+
+"""
+Алгоритмы ДЗ 2 Задание 4.	Найти сумму n элементов следующего ряда чисел:
+1 -0.5 0.25 -0.125 ...
+"""
+
+from memory_profiler import profile
+
+
+@profile
+def cycle(number_of_elements):
+    elem = 1
+    result = 0
+    for i in range(number_of_elements):
+        result += elem
+        elem = -elem / 2
+    print(f'Количество элементов - {number_of_elements}, их сумма - {result}')
+
+
+@profile
+def my_recursion(number_of_elements):
+    def sum_of_series(num):
+        if num == 0:
+            return 0
+        return 1 + sum_of_series(num - 1) / - 2
+    print(
+        f'Количество элементов - {number_of_elements}, их сумма - {sum_of_series(number_of_elements)}')
+
+
+number = 500
+cycle(number)
+my_recursion(number)
+
+"""
+Цикл занимает меньше памяти, чем рекурсия
+"""
