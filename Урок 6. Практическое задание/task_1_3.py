@@ -30,3 +30,36 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+Алгоритмы ДЗ 5 урок Задача 4.
+Создайте обычный словарь и упорядоченный словарь OrderedDict.
+"""
+
+
+from memory_profiler import profile
+from collections import OrderedDict
+
+my_dict = {}
+my_ordereddict = OrderedDict()
+number_iterations = 10 ** 3
+
+
+@profile
+def add_dict(dict_in, number):
+    for el in range(number):
+        dict_in[el] = el
+
+
+@profile
+def add_ordered_dict(ordereddict_in, number):
+    for el in range(number):
+        ordereddict_in[el] = el
+
+
+add_dict(my_dict, number_iterations)
+add_ordered_dict(my_ordereddict, number_iterations)
+
+"""
+OrderedDict занимает больше памяти, чем словарь
+"""
